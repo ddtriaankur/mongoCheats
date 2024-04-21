@@ -1,0 +1,16 @@
+Installing Prometheus 
+Update apt package list
+apt update
+Install Prometheus package
+apt  install prometheus --yes
+Confirm Prometheus is running and check if prometheus server is ready to serve the traffic
+systemctl status —full prometheus
+curl http://localhost:9090/-/ready
+- Needs Organization Owner or Project Owner Access for 3rd party integration
+
+Prometheus config file location
+vim /etc/prometheus/prometheus.yml
+Restart prometheus service
+systemctl restart prometheus
+Use Prometheus server api to check atlas deploy health
+curl http://localhost:9090/api/v1/targets | jq —raw-output ‘.data.activeTargets[] | .scrapeUrl + “ “ + health’
